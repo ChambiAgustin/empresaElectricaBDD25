@@ -1,0 +1,14 @@
+# Ignorar archivos compilados y temporales
+/bin/
+/out/
+/target/
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar configuraciones locales
+config.properties
+
+# Ignorar drivers o librerías externas
+*.jar
