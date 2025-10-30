@@ -4,16 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Modelo que representa la tabla `reclamo`.
- * Columnas mapeadas (según DDL):
- *  - num_reclamo (INT AUTO_INCREMENT)
- *  - id_usuario (INT)         -> idUsuario
- *  - cod_motivo (INT)        -> codMotivo
- *  - fecha (DATE)            -> fecha
- *  - hora (TIME)             -> hora
- *  - fecha_res (DATE)        -> fechaRes (nullable)
+ * Modelo que representa la tabla `reclamo`. (POJO)
  *
- * Usamos java.time.LocalDate / LocalTime para manipular fechas/horas.
+ * Mapea columnas (según tu DDL):
+ * - num_reclamo (INT AUTO_INCREMENT) -> numReclamo
+ * - id_usuario (INT)                 -> idUsuario
+ * - cod_motivo (INT)                 -> codMotivo
+ * - fecha (DATE)                     -> fecha
+ * - hora (TIME)                      -> hora
+ * - fecha_res (DATE)                 -> fechaRes (nullable)
+ *
+ * Usamos java.time.LocalDate / LocalTime para un manejo
+ * moderno y fácil de fechas/horas en Java.
  */
 public class Reclamo {
     private int numReclamo;
@@ -22,10 +24,19 @@ public class Reclamo {
     private LocalDate fecha;
     private LocalTime hora;
     private LocalDate fechaRes; // puede ser null si no resuelto
-    private String descripcion;  // opcional, si tu DDL tiene descripción
 
+    // Constructor vacío
     public Reclamo() {}
 
+    // Constructor para insertar (sin numReclamo)
+    public Reclamo(int idUsuario, int codMotivo, LocalDate fecha, LocalTime hora) {
+        this.idUsuario = idUsuario;
+        this.codMotivo = codMotivo;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
+    // Constructor completo (para leer de la BD)
     public Reclamo(int numReclamo, int idUsuario, int codMotivo, LocalDate fecha, LocalTime hora, LocalDate fechaRes) {
         this.numReclamo = numReclamo;
         this.idUsuario = idUsuario;
@@ -35,12 +46,7 @@ public class Reclamo {
         this.fechaRes = fechaRes;
     }
 
-    public Reclamo(int idUsuario, int codMotivo, LocalDate fecha, LocalTime hora) {
-        this.idUsuario = idUsuario;
-        this.codMotivo = codMotivo;
-        this.fecha = fecha;
-        this.hora = hora;
-    }
+    // --- Getters y Setters ---
 
     public int getNumReclamo() {
         return numReclamo;
@@ -90,14 +96,6 @@ public class Reclamo {
         this.fechaRes = fechaRes;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     @Override
     public String toString() {
         return "Reclamo{" +
@@ -107,7 +105,6 @@ public class Reclamo {
                 ", fecha=" + fecha +
                 ", hora=" + hora +
                 ", fechaRes=" + fechaRes +
-                ", descripcion='" + descripcion + '\'' +
                 '}';
     }
 }

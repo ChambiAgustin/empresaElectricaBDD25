@@ -2,11 +2,16 @@ package model;
 
 /**
  * Modelo que representa la tabla `usuario`.
- * Mapea columnas:
- *  - id_usuario (INT AUTO_INCREMENT)
- *  - direccion (VARCHAR)
+ * Es un "POJO" (Plain Old Java Object).
  *
- * Usamos este modelo en la capa DAO para recibir/retornar datos.
+ * ¿Por qué esta clase?
+ * Sirve para transportar datos de forma ordenada entre las capas
+ * de la aplicación. En lugar de pasar un 'String' con la dirección,
+ * pasamos un objeto 'Usuario' completo.
+ *
+ * Mapea columnas:
+ * - id_usuario (INT AUTO_INCREMENT) -> idUsuario
+ * - direccion (VARCHAR)             -> direccion
  */
 public class Usuario {
     private int idUsuario;
@@ -19,10 +24,13 @@ public class Usuario {
         this.direccion = direccion;
     }
 
+    // Constructor sin ID, útil para crear nuevos usuarios
+    // antes de insertarlos en la BD (ya que el ID es AUTO_INCREMENT).
     public Usuario(String direccion) {
         this.direccion = direccion;
     }
 
+    // Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }
